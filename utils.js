@@ -77,18 +77,28 @@ function getCookie( name ) {
 	if ( end == -1 ) end = document.cookie.length;
 	return unescape( document.cookie.substring( len, end ) );
 }
-function setCookie( name, value, expires, path, domain, secure ) {
-	var today = new Date();
-	today.setTime( today.getTime() );
-	if ( expires ) {
-		expires = expires * 1000 * 60 * 60 * 24;
-	}
-	var expires_date = new Date( today.getTime() + (expires) );
-	document.cookie = name+'='+escape( value ) +
-		( ( expires ) ? ';expires='+expires_date.toGMTString() : '' ) + //expires.toGMTString()
-		( ( path ) ? ';path=' + path : '' ) + 
-		( ( domain ) ? ';domain=' + domain : '' ) +
-		( ( secure ) ? ';secure' : '' );
+function setCookie(name, value, expires, path, domain) {
+  var cookie = name + "=" + escape(value) + ";";
+ //console.log(path);
+  if (expires) {
+    // If it's a date
+    if(expires instanceof Date) {
+      // If it isn't a valid date
+      if (isNaN(expires.getTime()))
+       expires = new Date();
+    }
+    else
+      expires = new Date(new Date().getTime() + parseInt(expires) * 1000 * 60 * 60 * 24);
+ 
+    cookie += "expires=" + expires.toGMTString() + ";";
+  }
+ 
+  if (path)
+    cookie += "path=" + path + ";";
+  if (domain)
+    cookie += "domain=" + domain + ";";
+ 
+  document.cookie = cookie;
 }
 function deleteCookie( name, path, domain ) {
 	if ( getCookie( name ) ) document.cookie = name + '=' +
