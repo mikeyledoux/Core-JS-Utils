@@ -1,4 +1,4 @@
 Core-JS-Utils
 =============
 
-Just a collection of non-jQuery-dependent functions and selectors
+A collection of non-jQuery-dependent functions and selectors, borrowed and adapted from: http://www.dustindiaz.com/top-ten-javascript
