@@ -108,7 +108,7 @@ function deleteCookie( name, path, domain ) {
 }
 
 function _Z(elmy) {
-	var mod_elm = (elmy.match(/#/)) ? document.getElementById(elmy.split('#')[1]) : (elmy.match(/\./)) ?  getElementsByClass(elmy.split('.')[1]) : "You must pass a valid jQuery style selector, i.e. '.class', '#id'!";
+	var mod_elm = (elmy.match(/#/)) ? document.getElementById(elmy.split('#')[1]) : (elmy.match(/\./)) ?  getElementsByClass(elmy.split('.')[1]) : (document.getElementsByTagName(elmy).length > 0) ? document.getElementsByTagName(elmy) : "You must pass a valid jQuery style selector, i.e. '.class', '#id'!";
 	return mod_elm;
 }
 function all(elm, func, args) {
